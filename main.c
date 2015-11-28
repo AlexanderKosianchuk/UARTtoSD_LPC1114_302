@@ -145,7 +145,7 @@ int main(void)
   		checkRes(&res);
   		res = f_lseek(&fil, (&fil)->fsize);
   		checkRes(&res);
-  		res = f_write (&fil, uartReadArr, readBytes-1, &writtenBytes);
+  		res = f_write (&fil, uartReadArr, readBytes, &writtenBytes);
   		checkRes(&res);
   		f_close(&fil);
 
