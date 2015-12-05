@@ -1930,7 +1930,7 @@ static inline void NVIC_DisableIRQ(IRQn_t IRQn)
 ## I2C
 ##############################################################################*/
 
-#define I2C_BASE_ADDRESS                          (0x40000000)
+#define I2C_BASE_ADDRESS                          (0x40000000UL)
 
 /*  I2CCONSET (I2C Control Set register)
     The I2CONSET registers control setting of bits in the I2CON register that controls

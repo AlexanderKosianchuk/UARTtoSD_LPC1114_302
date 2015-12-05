@@ -43,7 +43,6 @@
 
 #include "core/cpu/cpu.h"
 #include "core/uart/uart.h"
-#include "core/i2c/i2c.h"
 
 #include "core/timer32/timer32.h"
 #include "core/ssp/ssp.h"
@@ -86,7 +85,6 @@ void systemInit()
   gpioSetValue(CFG_SDCARD_ENPORT, CFG_SDCARD_ENPIN, 0);                  /* Disable card by setting ENPIN low */
   gpioSetPullup(&CFG_SDCARD_ENREG32, gpioPullupMode_Inactive);
 
-  i2cInit((uint32_t)I2CMASTER );	/* initialize I2c */
 
   // Set LED pin as output and turn LED off
   gpioSetDir(CFG_LED_PORT, CFG_LED_PIN, 1);

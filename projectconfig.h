@@ -333,7 +333,7 @@
 
     -----------------------------------------------------------------------*/
     #ifdef CFG_BRD_LPC1114_REFDESIGN
-      #define CFG_UART_BAUDRATE           (115200)
+      #define CFG_UART_BAUDRATE           (1843200)
       #define CFG_UART_BUFSIZE            (128)
     #endif
 
@@ -382,10 +382,10 @@
 
     -----------------------------------------------------------------------*/
     #ifdef CFG_BRD_LPC1114_REFDESIGN
-      #define CFG_LED_PORT                (0)
-      #define CFG_LED_PIN                 (7)
-      #define CFG_LED_ON                  (1)
-      #define CFG_LED_OFF                 (0)
+      #define CFG_LED_PORT                (1)
+      #define CFG_LED_PIN                 (9)
+      #define CFG_LED_ON                  (0)
+      #define CFG_LED_OFF                 (1)
     #endif
 
     #ifdef CFG_BRD_LPC1114_802154WIRELESS

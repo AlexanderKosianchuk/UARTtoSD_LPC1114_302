@@ -353,22 +353,51 @@ uint32_t i2cInit( uint32_t I2cMode )
 
   SCB_PRESETCTRL |= (0x1<<1);
 
+//  // Enable I2C clock
+//  SCB_SYSAHBCLKCTRL |= (SCB_SYSAHBCLKCTRL_I2C);
+//
+//  // Configure pin 0.4 for SCL
+//  IOCON_PIO0_4 &= ~(IOCON_PIO0_4_FUNC_MASK | IOCON_PIO0_4_I2CMODE_MASK);
+//  IOCON_PIO0_4 |= (IOCON_PIO0_4_FUNC_I2CSCL);
+//
+//  // Configure pin 0.5 for SDA
+//  IOCON_PIO0_5 &= ~(IOCON_PIO0_5_FUNC_MASK | IOCON_PIO0_5_I2CMODE_MASK);
+//  IOCON_PIO0_5 |= IOCON_PIO0_5_FUNC_I2CSDA;
+//
+//  // Clear flags
+//  I2C_I2CCONCLR = I2C_I2CCONCLR_AAC |
+//                  I2C_I2CCONCLR_SIC |
+//                  I2C_I2CCONCLR_STAC |
+//                  I2C_I2CCONCLR_I2ENC;
+
+
+  //also can try
+
+//  LPC_IOCON->PIO0_4 = 0xC1U; /* P0.4 = SCL */
+//  LPC_IOCON->PIO0_5 = 0xC1U; /* P0.5 = SDA */
+
   // Enable I2C clock
-  SCB_SYSAHBCLKCTRL |= (SCB_SYSAHBCLKCTRL_I2C);
+  SCB_SYSAHBCLKCTRL |= (1<<5);
 
   // Configure pin 0.4 for SCL
-  IOCON_PIO0_4 &= ~(IOCON_PIO0_4_FUNC_MASK | IOCON_PIO0_4_I2CMODE_MASK);
-  IOCON_PIO0_4 |= (IOCON_PIO0_4_FUNC_I2CSCL);
+  IOCON_PIO0_4 &= ~0x3F;	/*  I2C I/O config */
+  IOCON_PIO0_4 |= 0x01;		/* I2C SCL */
 
   // Configure pin 0.5 for SDA
-  IOCON_PIO0_5 &= ~(IOCON_PIO0_5_FUNC_MASK | IOCON_PIO0_5_I2CMODE_MASK);
-  IOCON_PIO0_5 |= IOCON_PIO0_5_FUNC_I2CSDA;
+  IOCON_PIO0_5 &= ~0x3F;
+  IOCON_PIO0_5 |= 0x01;		/* I2C SDA */
 
   // Clear flags
-  I2C_I2CCONCLR = I2C_I2CCONCLR_AAC | 
-                  I2C_I2CCONCLR_SIC | 
-                  I2C_I2CCONCLR_STAC | 
+  I2C_I2CCONCLR = I2C_I2CCONCLR_AAC |
+                  I2C_I2CCONCLR_SIC |
+                  I2C_I2CCONCLR_STAC |
                   I2C_I2CCONCLR_I2ENC;
+
+
+  /* IOCON may change in the next release, save change for future references. */
+//  LPC_IOCON->PIO0_4 |= (0x1<<10);	/* open drain pins */
+//  LPC_IOCON->PIO0_5 |= (0x1<<10);	/* open drain pins */
+
 
   // See p.128 for appropriate values for SCLL and SCLH
 #if I2C_FAST_MODE_PLUS
